@@ -1,63 +1,121 @@
-import React, { useState } from 'react';
-import task from '../assets/task.png'
-import logo from "../assets/digitalflaxlogo.png"
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import task from "../assets/task.png";
+import logo from "../assets/digitalflaxlogo.png";
 
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-const Login = () => 
-{  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
 
-    const [email,Setemail] = useState("");
-    const [password, Setpassword] =  useState("");
+    try {
+      const result = await axios.post("http://localhost:8080/login", {
+        email,
+        password,
+      });
+      if (result.data === "Success") {
+        navigate("/home");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Login failed. Please try again.");
+    }
+  };
 
-    const navigate =  useNavigate();
-
-    const handelsubmit =  (e) =>
-     { 
-        if(!email || !password)
-        {
-            alert("Please Enter Mial And Password")
-            return;
-        }
-
-        e.preventDefault();
-        axios.post('http://localhost:8080/login', {email , password})
-        .then(result => {console.log(result) 
-          if(result.data === "Success")
-        {
-            navigate('/home');
-        }
-    })
-        .catch(err => console.log(err));
-     }
-    return (
-    <div className="relative h-screen bg-blue bg-zinc-50">
-    <img
-      className=" absolute inset-0 object-cover w-full h-full"
-      src={task}
-      alt="Cover Image"/>
-
-<div className='absolute inset-0 w-full h-full bg-sky-100
- bg-opacity-50'></div>
-      
-      <div className="absolute top-1/5 right-1/3 transform translate-y-8 translate-x-8 flex flex-col items-center justify-center h-4/5 w-2/4 py-3 bg-white bg-opacity- 73 box-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color)">
-                <img src={logo} alt="Logo" className="h-16 mb-8" />
-                <h3 className="text-gray-800 text-2xl mb-4 pb-4">Welcome to Digitalflake Admin</h3>
-                <form  onSubmit={handelsubmit} className="mb-6 flex flex-col">
-                    <input type="email" placeholder="Email" className="w-full p-2 mb-4 rounded border-solid border-2 border-black-600" value={email} 
-                     onChange={(e) => Setemail(e.target.value)} required/>
-                    <input type="password" placeholder="Password" className="w-full p-2 mb-4 rounded  border-solid border-2 border-black-600" value={password} 
-                     onChange={(e) => Setpassword(e.target.value)} required/>
-                    <a href="#" className="text-gray-800 ms-8 py-2">Forgot password?</a>
-                    <button type="submit" className="w-full bg-purple-700 text-white py-2 px-2 rounded">Log In</button>
-                </form>
-                  <Link to="/signup"> SignUp</Link>
-            </div>
+  return (
+    <div
+      className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center"
+      style={{ backgroundImage: `url(${task})` }}
+    >
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="max-w-md w-full space-y-8 bg-white bg-opacity-90 p-10 rounded-xl shadow-2xl relative z-10">
+        <div>
+          <img
+            className="mx-auto h-20 w-auto"
+            src={logo}
+            alt="Digitalflake Logo"
+          />
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Welcome to Digitalflake Admin
+          </h2>
         </div>
-);
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <input type="hidden" name="remember" value="true" />
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="email-address" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="text-sm">
+              <a
+                href="#"
+                className="font-medium text-purple-600 hover:text-purple-500"
+              >
+                Forgot your password?
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
+        <p className="mt-2 text-center text-sm text-gray-600">
+          Or{" "}
+          <Link
+            to="/signup"
+            className="font-medium text-purple-600 hover:text-purple-500"
+          >
+            Sign up for an account
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
-
-
