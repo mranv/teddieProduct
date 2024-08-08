@@ -1,6 +1,6 @@
 import React from "react";
+import { createBrowserRouter, Outlet, useLocation } from "react-router-dom";
 import Login from "./Components/Login";
-import { createBrowserRouter, Outlet, useLocation, Navigate } from 'react-router-dom'
 import Home from "./Components/Home.js";
 import { Header } from "./Components/Header.js";
 import Sidebar from "./Components/Sidebar.js";
@@ -9,19 +9,19 @@ import Product from "./Components/Product.js";
 import Categoryinfo from "./Components/Categoryinfo.js";
 import SignUp from "./Components/Signup.js";
 import { ProductAdd } from "./Components/ProductAdd.js";
+import HomePage from "./Components/HomePage.js";
 
 function App() {
   const location = useLocation();
-
-  if (location.pathname === '/') {
-    return <Navigate to="/login" replace />;
-  }
+  const isHomePage = location.pathname === "/";
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <>
-     {(location.pathname !== '/login' && location.pathname !== '/signup') && <Header/>}
-     <Outlet/>
-     {(location.pathname !== '/login' && location.pathname !== '/signup') && <Sidebar/>}
+      {!isHomePage && !isAuthPage && <Header />}
+      <Outlet />
+      {!isHomePage && !isAuthPage && <Sidebar />}
     </>
   );
 }
@@ -31,6 +31,10 @@ export const appRouter = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
       {
         path: "/login",
         element: <Login />,

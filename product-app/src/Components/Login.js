@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import task from "../assets/task.png";
+import task from "../assets/pexels-olly-3770091.jpg";
 import logo from "../assets/digitalflaxlogo.png";
 
 const Login = () => {
@@ -41,10 +41,10 @@ const Login = () => {
           <img
             className="mx-auto h-20 w-auto"
             src={logo}
-            alt="Digitalflake Logo"
+            alt="Ease My Work Logo"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Welcome to Digitalflake Admin
+            Welcome to Ease My Work Admin
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

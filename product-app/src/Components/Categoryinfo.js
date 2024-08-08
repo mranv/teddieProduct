@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
 const Categoryinfo = () => {
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const storedCategories = localStorage.getItem('categories')
+    const storedCategories = localStorage.getItem("categories");
     if (storedCategories) {
-      setCategories(JSON.parse(storedCategories))
+      setCategories(JSON.parse(storedCategories));
     }
-  }, [])
+  }, []);
 
   const handleDeleteCategory = (index) => {
-    const updatedCategories = [...categories]
-    updatedCategories.splice(index, 1)
-    setCategories(updatedCategories)
-    localStorage.setItem('categories', JSON.stringify(updatedCategories))
-  }
+    const updatedCategories = [...categories];
+    updatedCategories.splice(index, 1);
+    setCategories(updatedCategories);
+    localStorage.setItem("categories", JSON.stringify(updatedCategories));
+  };
 
   return (
     <div className="flex justify-center items-start h-screen pt-20">
@@ -24,19 +24,28 @@ const Categoryinfo = () => {
         <div className="max-h-[calc(100vh-200px)] overflow-y-auto">
           {categories.length > 0 ? (
             categories.map((category, index) => (
-              <div key={index} className="border-2 border-gray-200 p-4 mb-4 grid grid-cols-3 gap-4 items-center">
+              <div
+                key={index}
+                className="border-2 border-gray-200 p-4 mb-4 grid grid-cols-3 gap-4 items-center"
+              >
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Category Name
+                  </label>
                   <p className="text-gray-600">{category.categoryname}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
                   <p className="text-gray-600">{category.description}</p>
                 </div>
                 <div className="flex items-center justify-end gap-2">
                   <p
                     className={`text-gray-600 ${
-                      category.active === 'active' ? 'text-green-500' : 'text-red-500'
+                      category.active === "active"
+                        ? "text-green-500"
+                        : "text-red-500"
                     }`}
                   >
                     {category.active}
@@ -69,7 +78,7 @@ const Categoryinfo = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Categoryinfo
+export default Categoryinfo;
