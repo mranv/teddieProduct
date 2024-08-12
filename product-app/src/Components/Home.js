@@ -40,7 +40,7 @@ const Home = () => {
       </main>
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
 
       {/* Mobile Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg z-20 md:hidden">
