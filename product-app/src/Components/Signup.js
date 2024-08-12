@@ -4,7 +4,7 @@ import axios from "axios";
 import task from "../assets/task.png";
 import logo from "../assets/digitalflaxlogo.png";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const [first_name, setFirstName] = useState("");
@@ -55,8 +55,8 @@ const SignUp = () => {
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center"
       style={{ backgroundImage: `url(${task})` }}
     >
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="max-w-md w-full space-y-8 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-10 rounded-xl shadow-2xl relative z-10">
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="max-w-md w-full space-y-8 bg-white bg-opacity-5 backdrop-filter backdrop-blur-md p-10 rounded-xl shadow-2xl relative z-10">
         <ToastContainer position="top-center" />
         <div>
           <img
@@ -77,7 +77,7 @@ const SignUp = () => {
                   name="first_name"
                   type="text"
                   required
-                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                   placeholder="First Name"
                   value={first_name}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -89,7 +89,7 @@ const SignUp = () => {
                   name="last_name"
                   type="text"
                   required
-                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                   placeholder="Last Name"
                   value={last_name}
                   onChange={(e) => setLastName(e.target.value)}
@@ -103,7 +103,7 @@ const SignUp = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -116,7 +116,7 @@ const SignUp = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -129,7 +129,7 @@ const SignUp = () => {
                   name="city"
                   type="text"
                   required
-                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                   placeholder="City"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
@@ -141,7 +141,7 @@ const SignUp = () => {
                   name="state"
                   type="text"
                   required
-                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                   placeholder="State"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
@@ -153,7 +153,7 @@ const SignUp = () => {
                   name="pincode"
                   type="text"
                   required
-                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                   placeholder="Pincode"
                   value={pincode}
                   onChange={(e) => setPincode(e.target.value)}
@@ -165,17 +165,17 @@ const SignUp = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-300"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 bg-opacity-80 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-300"
             >
               Sign Up
             </button>
           </div>
         </form>
-        <p className="mt-2 text-center text-sm text-gray-200">
+        <p className="mt-2 text-center text-sm text-white">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-medium text-purple-200 hover:text-purple-100 transition duration-300"
+            className="font-medium text-purple-300 hover:text-purple-200 transition duration-300"
           >
             Log in
           </Link>

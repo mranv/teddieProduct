@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import task from "../assets/pexels-olly-3770091.jpg";
+import task from "../assets/wp2508260-admin-wallpapers.jpg";
 import logo from "../assets/digitalflaxlogo.png";
 import { Context } from "../App";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -53,8 +53,8 @@ const Login = () => {
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center"
       style={{ backgroundImage: `url(${task})` }}
     >
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="max-w-md w-full space-y-8 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-10 rounded-xl shadow-2xl relative z-10">
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="max-w-md w-full space-y-8 bg-white bg-opacity-5 backdrop-filter backdrop-blur-md p-10 rounded-xl shadow-2xl relative z-10">
         <ToastContainer position="top-center" />
         <div>
           <img
@@ -79,7 +79,7 @@ const Login = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-50"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm bg-white bg-opacity-20"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -95,7 +95,7 @@ const Login = () => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-b-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm mt-2 bg-white bg-opacity-50"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-300 text-white rounded-b-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm mt-2 bg-white bg-opacity-20"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -117,17 +117,17 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 bg-opacity-80 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-300"
             >
               Sign in
             </button>
           </div>
         </form>
-        <p className="mt-2 text-center text-sm text-gray-200">
+        <p className="mt-2 text-center text-sm text-white">
           Or{" "}
           <Link
             to="/signup"
-            className="font-medium text-purple-200 hover:text-purple-100"
+            className="font-medium text-purple-300 hover:text-purple-200"
           >
             Sign up for an account
           </Link>
