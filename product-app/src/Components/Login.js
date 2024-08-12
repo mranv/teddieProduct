@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import task from "../assets/pexels-olly-3770091.jpg";
 import logo from "../assets/digitalflaxlogo.png";
+import { Context } from "../App";
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/ReactToastify.css';
+
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const { isAuthenticated, setIsAuthenticated, user, setUser } =
+    useContext(Context);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      alert("Please enter email and password");
+    if (!email || !password) 
+    {
+      let alertMessage = "Please enter ";
+      if (!email) {
+        alertMessage += "email";
+      }
+      if (!email && !password) {
+        alertMessage += " and ";
+      }
+      if (!password) {
+        alertMessage += "password";
+      }
+      toast.error(alertMessage);
       return;
+  
     }
 
     try {
@@ -21,14 +39,30 @@ const Login = () => {
         email,
         password,
       });
-      if (result.data === "Success") {
-        navigate("/home");
-      }
+      setIsAuthenticated(true);
+     
+      console.log(result, 'repose==============');
+
+      setUser(()=>({
+        email:result.data.email,
+        role:result.data.role,
+        firstname:result.data.first_name,
+        lastname:result.data.last_name,
+        uid:result.data.user_id,
+    
+      }))
+      localStorage.setItem("isAuthenticated", "true");
+
     } catch (err) {
       console.error(err);
-      alert("Login failed. Please try again.");
+      toast.error("Login failed. Invalid Email & Password!");
     }
+
   };
+ 
+  if(isAuthenticated==true){
+    navigate("/home");
+  }
 
   return (
     <div
@@ -37,6 +71,7 @@ const Login = () => {
     >
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="max-w-md w-full space-y-8 bg-white bg-opacity-90 p-10 rounded-xl shadow-2xl relative z-10">
+        <ToastContainer position="top-center"/>
         <div>
           <img
             className="mx-auto h-20 w-auto"
@@ -44,7 +79,7 @@ const Login = () => {
             alt="Ease My Work Logo"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Welcome to Ease My Work Admin
+            Welcome Back !!
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -65,7 +100,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
+            </div><br />
             <div>
               <label htmlFor="password" className="sr-only">
                 Password

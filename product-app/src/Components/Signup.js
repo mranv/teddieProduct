@@ -5,24 +5,37 @@ import task from "../assets/task.png";
 import logo from "../assets/digitalflaxlogo.png";
 
 const SignUp = () => {
-  const [name, setName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ // const [role, setRole] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [pincode, setPincode] = useState("");
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    if (!name || !email || !password) {
+    if (!first_name ||!last_name||!state||!city||!pincode || !email || !password) {
       alert("Please fill in all fields.");
       return;
     }
 
     try {
       const result = await axios.post("http://localhost:8080/signup", {
-        name,
+        first_name,
+        last_name,
         email,
         password,
-      });
+        //role,
+        city, state, pincode,
+      },
+      // {
+      //   withCredentials:true,
+      //   headers:{'Content-Type': 'application/json',}
+    
+      );
       console.log(result);
       navigate("/login");
     } catch (err) {
@@ -45,26 +58,43 @@ const SignUp = () => {
             alt="Digitalflake Logo"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Create your account
+            Welcome to EaseMyWork
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSignup}>
           <div className="rounded-md shadow-sm -space-y-px">
-            <div>
+            <div className="flex space-x-4">
+            <div className="w-1/2"> 
               <label htmlFor="name" className="sr-only">
-                Name
+                First Name
               </label>
               <input
-                id="name"
-                name="name"
+                id="first_name"
+                name="first_name"
                 type="text"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="First Name"
+                value={first_name}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
+            <div className="w-1/2">
+              <label htmlFor="name" className="sr-only">
+                Last Name
+              </label>
+              <input
+                id="last_name"
+                name="last_name"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                placeholder="Last Name"
+                value={last_name}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            </div><br/>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -80,7 +110,7 @@ const SignUp = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
+            </div><br/>
             <div>
               <label htmlFor="password" className="sr-only">
                 Password
@@ -96,6 +126,65 @@ const SignUp = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+            </div><br/>
+            {/* <div>
+              <label htmlFor="role" className="sr-only">
+                Role
+              </label>
+              <select className="w-full p-2 mb-4 rounded border-solid border-2 border-black-600" value={role}
+                        onChange={(e) => setRole(e.target.value)} required>
+                        <option value="" disabled>Select Role</option>
+                        <option value="Role_OWNER">Owner</option>
+                        <option value="ROLE_USER">User</option>
+                    </select>
+
+            </div> */}
+            <div className="flex space-x-4">
+            <div>
+              <label htmlFor="city" className="sr-only">
+                City
+              </label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="state" className="sr-only">
+                State
+              </label>
+              <input
+                id="state"
+                name="state"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                placeholder="State"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="pincode" className="sr-only">
+                Pincode
+              </label>
+              <input
+                id="pincode"
+                name="pincode"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                placeholder="Pincode"
+                value={pincode}
+                onChange={(e) => setPincode(e.target.value)}
+              />
+            </div>
             </div>
           </div>
 

@@ -1,28 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBrowserRouter, Outlet, useLocation } from "react-router-dom";
 import Login from "./Components/Login";
 import Home from "./Components/Home.js";
 import { Header } from "./Components/Header.js";
-import Sidebar from "./Components/Sidebar.js";
-import { Category } from "./Components/Categoryz.js";
-import Product from "./Components/Product.js";
-import Categoryinfo from "./Components/Categoryinfo.js";
 import SignUp from "./Components/Signup.js";
-import { ProductAdd } from "./Components/ProductAdd.js";
 import HomePage from "./Components/HomePage.js";
+import Footer from "./Components/Footer/Footer.jsx"
+import Admins from "./Components/Admins/Admins.jsx";
+import Services from "./Components/Services.js";
+import Booking from "./Components/Booking.js";
+import Payment from "./Components/Payment.js";
+import User from "./Components/User.js";
+import { ScrollRestoration } from 'react-router-dom';
+import { createContext } from "react";
+import Register from "./Components/Register.js";
+import DisplayEmployee from "./Components/DisplayEmployee.js";
+import EditEmployee from "./Components/EditEmployee.js";
+import EmployeeBooking from "./Components/Testimonial/EmployeBooking.js";
 
+
+export const Context = createContext({ isAuthenticated: false });
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
+  const[selectedemployee,setSelectedemployee]=useState([]);
+
+  useEffect(()=>{
+
+const authenticate = localStorage.getItem("isAuthenticated")
+console.log(authenticate,"asdaf...........................................");
+if(authenticate=="true")
+  {
+  // setIsAuthenticated(true);
+  // console.log("printttttttttttttttttt");
+  // setUser(()=>({
+  //   email:"sjdnj@gmail.com",
+  //   role,
+  //   firstname,
+  //   lastname,
+  //   uid
+
+  // }))
+}
+  },[])
+
+
   return (
-    <>
+    <Context.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        setUser,
+        selectedemployee,
+        setSelectedemployee,
+      }}
+    >
+      <ScrollRestoration />
+
       {!isHomePage && !isAuthPage && <Header />}
       <Outlet />
-      {!isHomePage && !isAuthPage && <Sidebar />}
-    </>
+      {!isHomePage && !isAuthPage && <Footer />}
+      {/* {!isHomePage && !isAuthPage && <Sidebar />} */}
+    </Context.Provider>
   );
 }
 
@@ -48,20 +94,40 @@ export const appRouter = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/category",
-        element: <Category />,
+        path:"/book",
+        element:<EmployeeBooking/>
       },
       {
-        path: "/product",
-        element: <Product />,
+        path: "/contact",
+        element: <Admins />,
       },
       {
-        path: "/categoryinfo",
-        element: <Categoryinfo />,
+        path:"/register",
+        element:<Register/>,
       },
       {
-        path: "/productadd",
-        element: <ProductAdd />,
+        path: "/booking",
+        element: <Booking />,
+      },
+      {
+        path:"/display",
+        element:<DisplayEmployee/>,
+      },
+      {
+        path:"/editemp/:empid",
+        element:<EditEmployee/>,
+      },
+      {
+        path: "/services",
+        element: <Services />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
+      },
+      {
+        path: "/user",
+        element: <User />,
       },
     ],
   },
