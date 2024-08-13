@@ -1,4 +1,3 @@
-// File: src/Components/Navbar/Navbar.jsx
 import React, { useState, useEffect } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -30,10 +29,11 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <div className="h-20 max-w-64 flex items-center justify-center animate-none">
+              <div className="h-12 md:h-16 max-w-64 flex items-center justify-center">
                 <img
                   src={logo}
                   alt="EaseMyWork Logo"
@@ -42,8 +42,10 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex items-center space-x-4">
               {Navlinks.map(({ id, name, link }, index) => (
                 <Link
                   key={id}
@@ -56,6 +58,8 @@ const Navbar = () => {
               ))}
             </div>
           </div>
+
+          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setShowMenu(!showMenu)}
@@ -76,6 +80,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       {/* Mobile menu */}
       <div
         className={`md:hidden transition-all duration-300 ease-in-out ${

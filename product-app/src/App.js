@@ -20,33 +20,29 @@ import EmployeeBooking from "./Components/Testimonial/EmployeBooking.js";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 
 export const Context = createContext({ isAuthenticated: false });
+
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
   const [selectedemployee, setSelectedemployee] = useState([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     const authenticate = localStorage.getItem("isAuthenticated");
-    console.log(
-      authenticate,
-      "asdaf..........................................."
-    );
-    if (authenticate == "true") {
-      // setIsAuthenticated(true);
-      // console.log("printttttttttttttttttt");
-      // setUser(()=>({
-      //   email:"sjdnj@gmail.com",
-      //   role,
-      //   firstname,
-      //   lastname,
-      //   uid
-      // }))
+    if (authenticate === "true") {
+      setIsAuthenticated(true);
     }
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -58,15 +54,18 @@ function App() {
         setUser,
         selectedemployee,
         setSelectedemployee,
+        isMobile,
       }}
     >
       <ScrollRestoration />
-
-      {!isHomePage && !isAuthPage && <Header />}
-      {/* {!isHomePage && !isAuthPage && <Navbar />} */}
-      <Outlet />
-      {!isHomePage && !isAuthPage && <Footer />}
-      {/* {!isHomePage && !isAuthPage && <Sidebar />} */}
+      <div className={`app-container ${isMobile ? "mobile" : "desktop"}`}>
+        {!isHomePage && !isAuthPage && <Header />}
+        {!isHomePage && !isAuthPage && (isMobile ? <Navbar /> : null)}
+        <main className="main-content">
+          <Outlet />
+        </main>
+        {!isHomePage && !isAuthPage && <Footer />}
+      </div>
     </Context.Provider>
   );
 }
@@ -76,58 +75,19 @@ export const appRouter = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />,
-      },
-      {
-        path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/book",
-        element: <EmployeeBooking />,
-      },
-      {
-        path: "/contact",
-        element: <Admins />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/booking",
-        element: <Booking />,
-      },
-      {
-        path: "/display",
-        element: <DisplayEmployee />,
-      },
-      {
-        path: "/editemp/:empid",
-        element: <EditEmployee />,
-      },
-      {
-        path: "/services",
-        element: <Services />,
-      },
-      {
-        path: "/payment",
-        element: <Payment />,
-      },
-      {
-        path: "/user",
-        element: <User />,
-      },
+      { path: "/", element: <HomePage /> },
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <SignUp /> },
+      { path: "/home", element: <Home /> },
+      { path: "/book", element: <EmployeeBooking /> },
+      { path: "/contact", element: <Admins /> },
+      { path: "/register", element: <Register /> },
+      { path: "/booking", element: <Booking /> },
+      { path: "/display", element: <DisplayEmployee /> },
+      { path: "/editemp/:empid", element: <EditEmployee /> },
+      { path: "/services", element: <Services /> },
+      { path: "/payment", element: <Payment /> },
+      { path: "/user", element: <User /> },
     ],
   },
 ]);
