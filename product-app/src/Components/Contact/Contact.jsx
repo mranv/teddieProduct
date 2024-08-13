@@ -6,26 +6,26 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20"
+      className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white py-20 transition-colors duration-300"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight font-secondary">
             Let's Collaborate in Making Your Home Divine!
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 font-primary">
             Transform your living space with our expert services. Book now and
             experience the difference!
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link
               to="/services"
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-100 transition duration-300 ease-in-out"
+              className="btn-modern-secondary inline-flex items-center justify-center"
             >
               Explore Services
               <FaArrowRight className="ml-2" />
             </Link>
-            <button className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out">
+            <button className="btn-modern-primary inline-flex items-center justify-center">
               <FaSpinner className="animate-spin mr-2" />
               Book Now
             </button>

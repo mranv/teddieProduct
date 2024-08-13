@@ -48,11 +48,11 @@ const User = () => {
         </div>
 
         <div className="space-y-4 mb-8">
-          <UserInfoItem
+          {/* <UserInfoItem
             icon={<FaUserTag className="text-purple-400" />}
             label="Role"
             value={user.role}
-          />
+          /> */}
           <UserInfoItem
             icon={<FaMapMarkerAlt className="text-purple-400" />}
             label="Location"

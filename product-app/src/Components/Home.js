@@ -8,21 +8,17 @@ import Testimonial from "../Components/Testimonial/Testimonial";
 import CarList from "../Components/CarList/CarList";
 import Contact from "../Components/Contact/Contact";
 import Footer from "../Components/Footer/Footer";
-
 // Import background image
 import backgroundImage from "../assets/task.png";
 
 const Home = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200">
+    <div className="relative min-h-screen bg-gradient-professional text-gray-900 dark:text-gray-100">
       {/* Background Image with Parallax Effect */}
       <div
-        className="fixed inset-0 bg-cover bg-center bg-fixed -z-10"
+        className="fixed inset-0 bg-cover bg-center bg-fixed opacity-10 -z-10"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       />
-
-      {/* Overlay with reduced opacity for better visibility */}
-      <div className="fixed inset-0 bg-black opacity-30 -z-10" />
 
       {/* Navbar */}
       <Navbar />
@@ -49,7 +45,7 @@ const Home = () => {
             <Link
               key={item}
               to={index === 0 ? "/" : `/${item.toLowerCase()}`}
-              className="flex flex-col items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-300"
+              className="flex flex-col items-center text-vibrant-blue hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

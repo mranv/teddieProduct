@@ -1,28 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Context } from "../App";
+
 
 const Booking = () => {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const {user,setUser}=useContext(Context);
+
   useEffect(() => {
     fetchBookings();
   }, []);
-
-  const fetchBookings = async () => {
+  
+  const fetchBookings = async (user) => {
+    console.log(user,"dfdfsdfdsfsd");
+    const emailid=user
     try {
       setIsLoading(true);
       const response = await axios.get(
-        "http://localhost:8080/api/user/bookings"
+      //  `http://localhost:8080/api/user/bookings/${emailid}`
       );
+      console.log(user);
       setBookings(response.data);
       setError(null);
     } catch (err) {
       console.error("Error fetching bookings", err);
-      setError("Failed to fetch bookings. Please try again later.");
+      //setError("Failed to fetch bookings. Please try again later.");
       toast.error("Failed to fetch bookings. Please try again later.");
     } finally {
       setIsLoading(false);
