@@ -24,7 +24,9 @@ const User = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    setUser(null);
+    setUser({});
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("isAuthenticated");
     navigate("/login");
   };
 

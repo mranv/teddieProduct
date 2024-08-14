@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../Components/Navbar/Navbar";
 import Hero from "../Components/Hero/Hero";
 import About from "../Components/About/About";
 import Services from "../Components/Services/Services";
@@ -9,93 +8,64 @@ import CarList from "../Components/CarList/CarList";
 import Contact from "../Components/Contact/Contact";
 
 const Home = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      {/* Navbar */}
-      <Navbar />
-
+    <div className="min-h-screen flex flex-col w-full">
       {/* Main Content */}
-      <main className="pt-16 md:pt-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <section
-            id="home"
-            className="min-h-screen flex items-center justify-center py-12 md:py-20"
-          >
-            <Hero />
-          </section>
-
-          <section
-            id="about"
-            className="min-h-screen flex items-center justify-center py-12 md:py-20 bg-white dark:bg-gray-800"
-          >
-            <About />
-          </section>
-
-          <section
-            id="services"
-            className="min-h-screen flex items-center justify-center py-12 md:py-20"
-          >
-            <Services />
-          </section>
-
-          <section
-            id="cars"
-            className="min-h-screen flex items-center justify-center py-12 md:py-20 bg-white dark:bg-gray-800"
-          >
-            <CarList />
-          </section>
-
-          <section
-            id="testimonials"
-            className="min-h-screen flex items-center justify-center py-12 md:py-20"
-          >
-            <Testimonial />
-          </section>
-
-          <section
-            id="contact"
-            className="min-h-screen flex items-center justify-center py-12 md:py-20 bg-white dark:bg-gray-800"
-          >
-            <Contact />
-          </section>
+      <main className="flex-grow overflow-y-auto">
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+          <Hero />
+          <About />
+          <Services />
+          <CarList />
+          <Testimonial />
+          <Contact />
         </div>
       </main>
 
       {/* Mobile Navigation */}
-      {isMobile && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg z-20">
-          <nav className="flex justify-around py-3">
-            {["Home", "Services", "Contact"].map((item, index) => (
-              <Link
-                key={item}
-                to={index === 0 ? "/" : `/#${item.toLowerCase()}`}
-                className="flex flex-col items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
+      <nav className="sticky bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg z-20 md:hidden">
+        <div className="flex justify-around py-3">
+          {[
+            {
+              name: "Home",
+              path: "/",
+              icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+            },
+            {
+              name: "Services",
+              path: "/services",
+              icon: "M13 10V3L4 14h7v7l9-11h-7z",
+            },
+            {
+              name: "Contact",
+              path: "/contact",
+              icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+            },
+          ].map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className="flex flex-col items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 mb-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 mb-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {/* SVG paths remain the same */}
-                </svg>
-                <span className="text-xs">{item}</span>
-              </Link>
-            ))}
-          </nav>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={item.icon}
+                />
+              </svg>
+              <span className="text-xs">{item.name}</span>
+            </Link>
+          ))}
         </div>
-      )}
+      </nav>
     </div>
   );
 };

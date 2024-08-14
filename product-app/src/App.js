@@ -17,7 +17,7 @@ import Register from "./Components/Register.js";
 import DisplayEmployee from "./Components/DisplayEmployee.js";
 import EditEmployee from "./Components/EditEmployee.js";
 import EmployeeBooking from "./Components/Testimonial/EmployeBooking.js";
-import Navbar from "./Components/Navbar/Navbar.jsx";
+import Rating from "./Components/Rating.js";
 
 export const Context = createContext({ isAuthenticated: false });
 
@@ -29,44 +29,46 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
   const [selectedemployee, setSelectedemployee] = useState([]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const authenticate = localStorage.getItem("isAuthenticated");
-    if (authenticate === "true") {
+    const authenticate = sessionStorage.getItem("isAuthenticated");
+    const peruser = JSON.parse(sessionStorage.getItem("user"));
+    console.log(
+      authenticate,
+      "asdaf..........................................."
+    );
+    if (authenticate === "true" && Object.keys(peruser).length !== 0) {
       setIsAuthenticated(true);
+      setUser(() => ({
+        ...peruser,
+      }));
     }
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    setIsLoading(true);
   }, []);
 
   return (
-    <Context.Provider
-      value={{
-        isAuthenticated,
-        setIsAuthenticated,
-        user,
-        setUser,
-        selectedemployee,
-        setSelectedemployee,
-        isMobile,
-      }}
-    >
-      <ScrollRestoration />
-      <div className={`app-container ${isMobile ? "mobile" : "desktop"}`}>
-        {!isHomePage && !isAuthPage && <Header />}
-        {!isHomePage && !isAuthPage && (isMobile ? <Navbar /> : null)}
-        <main className="main-content">
-          <Outlet />
-        </main>
-        {!isHomePage && !isAuthPage && <Footer />}
-      </div>
-    </Context.Provider>
+    isLoading && (
+      <Context.Provider
+        value={{
+          isAuthenticated,
+          setIsAuthenticated,
+          user,
+          setUser,
+          selectedemployee,
+          setSelectedemployee,
+        }}
+      >
+        <div className="min-h-screen flex flex-col">
+          <ScrollRestoration />
+          {!isHomePage && !isAuthPage && <Header />}
+          <main className="flex-grow">
+            <Outlet />
+          </main>
+          {!isHomePage && !isAuthPage && <Footer />}
+        </div>
+      </Context.Provider>
+    )
   );
 }
 
@@ -78,6 +80,7 @@ export const appRouter = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
+      { path: "/comment/:empid", element: <Rating /> },
       { path: "/home", element: <Home /> },
       { path: "/book", element: <EmployeeBooking /> },
       { path: "/contact", element: <Admins /> },

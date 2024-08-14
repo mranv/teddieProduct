@@ -30,6 +30,12 @@ const Login = () => {
         password,
       });
       setIsAuthenticated(true);
+      const dummy={  email: result.data.email,
+        role: result.data.role,
+        firstname: result.data.first_name,
+        lastname: result.data.last_name,
+        uid: result.data.user_id}
+
       setUser(() => ({
         email: result.data.email,
         role: result.data.role,
@@ -37,7 +43,8 @@ const Login = () => {
         lastname: result.data.last_name,
         uid: result.data.user_id,
       }));
-      localStorage.setItem("isAuthenticated", "true");
+      sessionStorage.setItem("isAuthenticated", "true");
+      sessionStorage.setItem("user",JSON.stringify(dummy));
     } catch (err) {
       console.error(err);
       toast.error("Login failed. Invalid Email & Password!");
